@@ -1,9 +1,6 @@
 package org.boots.coffee.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,6 +15,8 @@ import java.time.LocalDateTime;
 public class Coffeeshop {
 
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "personid")
     private Long personid;
@@ -25,6 +24,11 @@ public class Coffeeshop {
     private Long coffeeid;
     @Column(name = "datetime")
     private LocalDateTime dateTime;
+
+    public Coffeeshop(Long personid, Long coffeeid) {
+        this.personid = personid;
+        this.coffeeid = coffeeid;
+    }
 
     @Override
     public String toString() {

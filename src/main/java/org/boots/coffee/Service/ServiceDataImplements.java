@@ -61,8 +61,9 @@ public class ServiceDataImplements {
             Coffeeshop coffeeshop = new Coffeeshop();
             coffeeshop.setPersonid(person.orElseThrow().getId());
             coffeeshop.setCoffeeid(coffee.orElseThrow().getId());
-            coffeeshopRepository.insertNewTransaction(coffeeshop.getPersonid(), coffeeshop.getCoffeeid());
-        } catch (JSONException | RuntimeException e ) {
+            coffeeshop.setDateTime(LocalDateTime.now());
+            coffeeshopRepository.save(coffeeshop);
+        } catch (JSONException | RuntimeException e) {
             return "Not correct";
         }
         return "Correct";
