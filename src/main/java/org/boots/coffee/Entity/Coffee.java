@@ -18,7 +18,7 @@ public class Coffee {
     @Column(name = "name")
     private String name;
     @Column(name = "price")
-    private int price;
+    private Integer price;
 
 
     @Override

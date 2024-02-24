@@ -8,6 +8,8 @@ import org.boots.coffee.Repository.CoffeeshopRepository;
 import org.boots.coffee.Repository.PersonsRepository;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -52,7 +54,8 @@ public class ServiceDataImplements {
         return builder.toString();
     }
 
-    public String newBuy(JSONObject object) {
+    public ResponseEntity<String> newBuy(JSONObject object) {
+
         try {
             String personName = object.getString("name");
             String coffeeName = object.getString("coffee");
@@ -64,7 +67,21 @@ public class ServiceDataImplements {
             coffeeshop.setDateTime(LocalDateTime.now());
             coffeeshopRepository.save(coffeeshop);
         } catch (JSONException | RuntimeException e) {
-            return "Not correct";
+            return new ResponseEntity<>("Not correct", HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>("Correct", HttpStatus.ACCEPTED);
+    }
+
+    public String newCoffee(JSONObject object) {
+        try {
+            String name = object.getString("name");
+            Integer price = object.getInt("price");
+            Coffee coffee =new Coffee();
+            coffee.setName(name);
+            coffee.setPrice(price);
+            coffeeRepository.save(coffee);
+        } catch (JSONException e) {
+            System.out.println("Incorrect");;
         }
         return "Correct";
     }

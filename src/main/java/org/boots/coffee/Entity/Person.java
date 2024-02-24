@@ -1,9 +1,6 @@
 package org.boots.coffee.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Controller;
 
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Controller;
 @Table(name = "persons")
 public class Person {
     @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
